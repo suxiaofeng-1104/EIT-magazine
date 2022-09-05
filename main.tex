@@ -50,7 +50,8 @@ breaklinks=true}
 \def \VM {\mathcal{VM}}
 \def \re {\text{Re}}
 \def \nc {\mathcal{NC}}
-\def \ch {\textcolor{red}{(cite here) }}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
 
 \begin{document}
 
@@ -72,22 +73,35 @@ This work was supported in part by the National Key Research and Development Pro
 \end{abstract}
 
 \begin{IEEEkeywords}
-    Electromagnetic information theory (EIT), prolate spher
+    Electromagnetic information theory (EIT), prolate spheroidal wave functions. 
 \end{IEEEkeywords}
 
 \section{Introduction}
-Existing wireless systems use spatially discrete transceivers to communicate. For example, single-input single-output (SISO) systems consider single points as the transceivers and MIMO systems utilize discrete point sets in the spatial region as the transceivers. 
+%% leading paragraph. 
+\blue{First para. by zja} Ultra-high-speed wireless communication are expected to play a cornerstone role in future applications including immersive virtual reality, digital twins, and holographic videos. 
+In order to fulfill these visions, massive amount of multiplexing technologies have been proposed to exploit various communication resources in the space (SDMA), frequency (FDMA), time (TDMA), polarization, code (CDMA), and even power domains (NOMA) for increasing overall transmission rate. 
+Thus, a natural question arises: {\it what is the fundamental physical limit of such multiplexing in a wireless system?}
+To answer this question, an intuitive observation is that most of these communication resources correspond to some physical quantities that can be independently manipulated. To be concrete, these quantities are the space, frequency, time, and polarization of an electromagnetic impulse that can be generated and transmitted. Though some of these multiplexing technologies are based on mathematical divisions of the channel (CDMA and NOMA), all these multiplexing capability is essentially provided by the electromagnetic fields that finally carry the information. Therefore, it is necessary to construct a theory that can model and analyze the wireless information systems built on continuous electromagnetic fields, which leads to the research on electromagnetic information theory (EIT).
+
+
+\blue{Alternative first para.} Existing wireless systems use spatially discrete transceivers for communication. 
+For example, single-input single-output (SISO) systems consider a pair of points as the transceivers, and MIMO systems regard discrete point sets in certain spatial region as the transceivers. 
 There have been abundant works on spatially discrete systems, and the corresponding theory is well-established. 
 However, this discreteness mismatches the spatially continuous electromagnetic field, which is the physical carrier of information in the wireless system. 
 The mismatch may cause a performance gap between the discrete system and the ideal continuous system which suits the electromagnetic field. 
 Therefore, a theory that can model and analyze the wireless information system with continuous electromagnetic fields is necessary, which leads to the research on electromagnetic information theory (EIT).
 
-EIT is an interdisciplinary subject that combines deterministic physical theory and statistical mathematical theory to study the transmission mechanism of information in the spatially continuous electromagnetic field. 
+%% The definition of EIT. 
+EIT is an interdisciplinary subject that combines deterministic physical theory and statistical mathematical theory to study the transmission mechanism of information via spatially continuous electromagnetic field. 
 Specifically, it utilizes the basic laws and conclusions in classical electromagnetic theory and information theory to build the system modeling and performance analysis frameworks that fit the electromagnetic propagation theory for wireless information systems. 
- 
-In this article, we systematically investigate the ideas and analyzing schemes of EIT. The key features of this article can be summarized as follows:
+
+%% Overview of recent progress in EIT. 
+
+
+%% Our contributions.
+In this article, we systematically investigate the ideas and analysis techniques of EIT. The key features of this article can be summarized as follows:
 \begin{itemize}
-\item{The fundamental analyzing schemes and mathematical tools of EIT, which originate from classical information theory and electromagnetic theory, are introduced separately. Specifically, for information theory, the DoF and channel capacity, which are key performance indicators of the wireless system, can be analyzed by using prolate spheroidal wave functions (PSWFs) and statistical theory. For electromagnetic theory, the mainstream is to use Maxwell's equations to build the deterministic electromagnetic field model. Considering both the classical information theory and electromagnetic theory, random fields are introduced to analyze the statistical characteristics of the continuous electromagnetic field, which enables the performance analysis of EIT. }
+\item{The fundamental analysis techniuqes and mathematical tools for EIT, which originate from classical information theory and electromagnetic theory, are introduced separately. Specifically, for information theory, the DoF and channel capacity, which are key performance indicators of wireless systems, can be analyzed by using prolate spheroidal wave functions (PSWFs) and statistical theory. For electromagnetic theory, the mainstream is to use Maxwell's equations to build the deterministic electromagnetic field model. Considering both the classical information theory and electromagnetic theory, random fields are introduced to analyze the statistical characteristics of the continuous electromagnetic field, which enables the performance analysis of EIT. }
 \item{Based on the fundamental schemes and tools that can be used in EIT, we further investigate the modeling method of EIT. The deterministic modeling approach and the stochastic modeling approach of the continuous channel are discussed separately. Moreover, the noise model is built in EIT by distinguishing different sources of noise and analyzing the spatial correlation of the noise field. After discussing the model of EIT, DoF, mutual information, and capacity are analyzed by the tools including the PSWFs.} 
 \item{Several open problems in EIT are pointed out. For example, the noise model in traditional discrete communication systems and continuous communication systems need to be built compatible, which is a key factor to unify the theory of traditional MIMO systems and continuous systems based on EIT.}
 \end{itemize}
@@ -110,7 +124,7 @@ Usually in the communication context, the DoF refers to the number of orthogonal
 Thus, we use the term {\textbf{\emph{channel DoF}}} to describe such a number associated with a channel.
 
 % introduce the functional DoF. 
-In contrast, the DoF is defined asymptotically in the information theory context. From a rigorous point of view, the (asymptotic) DoF is defined to be the minimum dimension $n$ of a functional subspace $\mathcal{B}_n$ that can approximate any function in a larger space $\mathcal{B}$ with arbitrarily given small error $\epsilon$ \cite{poon2005degrees}. For example, the asymptotic DoF of a $W$-bandlimited signal with observation duration $T$ is proved to be $2WT+o(2WT)$. 
+In contrast, the DoF is defined asymptotically in the information theory context. From a rigorous point of view, the (asymptotic) DoF is defined to be the minimum dimension $n$ of a functional subspace $\mathcal{B}_n$ that can approximate any function in a larger space $\mathcal{B}$ with arbitrarily given small error $\epsilon$ \cite{poon2005degrees}. For example, the asymptotic DoF of a $W$-bandlimited signal with observation duration $T$ is proved to be $2WT+o(2WT)$ \cite{slepian1976bandwidth}. 
 Since this kind of DoF numerically characterizes the possibility to approximate a generally infinite-dimensional functional space $\mathcal{B}$ by a finite-dimensional subspace, we refer to it as the {\textbf{\emph{functional DoF}}}. 
 It is worth noting that the functional DoF can be alternatively interpreted as the number of minimal required samples to approximately reconstruct an unknown signal. 
 
@@ -190,14 +204,14 @@ Mathematically, an antenna acts as a continuous integral operator that weights t
 Thus, the EIT channel model is expected to be written in a continuous linear operator language, whether the operator is deterministic or stochastic.
 \begin{figure}
 	\centering 
-	\includegraphics[height=4cm, width=9cm]{figures/random_channel.png} 
-	\caption{Continuous channel modeling with Fourier plane-wave series expansion \cite{9724113}.} 
+	\includegraphics[width=\linewidth]{figures/random_channel.png} 
+	\caption{Continuous channel modeling with Fourier plane-wave series expansion \cite{marzetta2022fourier}.} 
 	\label{fig:marzetta}
 \end{figure}
 
 On the deterministic channel modeling approach, the channel is fixed or at least varying slowly. The simplest deterministic continuous channel model is the line-of-sight (LoS) model, which assumes no scatterers between the transceivers. In this scenario, the operator of the channel is the Green's function in free space. More complex modeling schemes consider the scatterers and classify them into different clusters. The channel operator depends on the location of the clusters.
 
-Another approach which uses stochastic channel model assumes that some given statistical characteristics of the channel can be obtained. As introduced in Subsection~\ref{Sec_2_Subsec_4}, GRFs are suitable to model the randomness of the channel and can provide useful tools such as Bayesian inference for channel estimation. For the stochastic channel modeling, a widely used scheme is the Fourier plane-wave expansion which decomposes the channel using plane waves \cite{9724113}. Such expansion is shown in Fig. \ref{fig:marzetta} and is equal to performing the Fourier transform on the stochastic channel. The spectrum of the channel in the wavenumber domain and the autocorrelation function of the channel can also be derived under the GRF channel model, which can facilitate the mutual information and capacity analysis of the channel.
+Another approach which uses stochastic channel model assumes that some given statistical characteristics of the channel can be obtained. As introduced in Subsection~\ref{Sec_2_Subsec_4}, GRFs are suitable to model the randomness of the channel and can provide useful tools such as Bayesian inference for channel estimation. For the stochastic channel modeling, a widely used scheme is the Fourier plane-wave expansion which decomposes the channel using plane waves \cite{marzetta2022fourier}. Such expansion is shown in Fig. \ref{fig:marzetta} and is equal to performing the Fourier transform on the stochastic channel. The spectrum of the channel in the wavenumber domain and the autocorrelation function of the channel can also be derived under the GRF channel model, which can facilitate the mutual information and capacity analysis of the channel.
 
 
 \subsubsection{Noise field modeling}
@@ -278,7 +292,7 @@ Several works have already explored the pattern design scheme for CAP-MIMO syste
 \subsection{Field Reconstruction}
 In engineering practice, it is often required to reconstruct the values of an electromagnetic field from a finite number of available observations, which is called the field reconstruction problem. 
 To solve this problem, prior information about the electromagnetic field is often exploited, including the spatially band-limited property and the spatial correlation that the electromagnetic field exhibits. 
-The spatially bandlimited property justifies the cardinal series $\sum_n e(n{\bm Q}) {\rm jinc}(|{\bm r}-n{\bm Q}|)$ as asymptotically optimal linear interpolators of the electromagnetic field, while the field correlation function leads to Gaussian process regression (GPR)-based field interpolators. 
+The spatially bandlimited property justifies the cardinal series $\sum_n e(n{\bm Q}) {\rm jinc}(|{\bm r}-n{\bm Q}|)$ as asymptotically optimal linear interpolators \cite{pizzo2022nyquist} of the electromagnetic field, while the field correlation function leads to Gaussian process regression (GPR)-based field interpolators. 
 These field interpolators have wide applications in field measurement tasks and channel prediction problems. 
 
 \section{Open Problems}
