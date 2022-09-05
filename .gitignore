@@ -1,0 +1,23 @@
+# Latex workspace & outputs.
+/*.pdf
+*.synctex.gz
+*.thm
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.out
+
+*.log
+*.mat
+
+.DS_Store
+.vscode/
+*.asv
+*.xdv
+
+# Data storage.
+data/
+
+
