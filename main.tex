@@ -5,13 +5,13 @@
 \usepackage{acronym}  % make an acronym
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{balance}
+% \usepackage{balance}
 \usepackage{bm}
 \usepackage{bbm}
 \usepackage{booktabs}
 \usepackage{color, soul}
 \usepackage{cite}
-\usepackage{flushend}
+% \usepackage{flushend}	% Kunzan leads to problems. 
 \usepackage{graphicx}
 \usepackage{indentfirst}
 \usepackage{lipsum}
@@ -60,7 +60,7 @@ breaklinks=true}
 % \author{{Jieao~Zhu, Kunzan~Liu, Zhongzhichao~Wan, and Linglong~Dai, {\textit{Fellow, IEEE}}
 % }
 \author{{Awesome Authors}
-\thanks{J. Zhu, K. Liu, Z. Wan, and L. Dai are with the Beijing National Research Center for Information Science and Technology (BNRist) as well as the Department of Electronic Engineering, Tsinghua University, Beijing 100084, China (e-mails: \{zja21, lkz18, wzzc20\}@mails.tsinghua.edu.cn, daill@tsinghua.edu.cn).
+\thanks{J. Zhu, Z. Wan, and L. Dai are with the Beijing National Research Center for Information Science and Technology (BNRist) as well as the Department of Electronic Engineering, Tsinghua University, Beijing 100084, China (e-mails: \{zja21, wzzc20\}@mails.tsinghua.edu.cn, daill@tsinghua.edu.cn).
 
 
 This work was supported in part by the National Key Research and Development Program of China (Grant No.2020YFB1807201), in part by the National Natural Science Foundation of China (Grant No. 62031019), and in part by the European Commission through the H2020-MSCA-ITN META WIRELESS Research Project (Grant No. 956256).}
@@ -160,7 +160,7 @@ GRFs are random multivariate functions whose finite-dimensional marginal distrib
 Inheriting favorable mathematical properties from Gaussian distributions, such GRF modeling exhibits good analytical properties that can facilitate both theoretical deduction and numerical inference. 
 
 In EIT, the GRFs can be utilized to model both the EM channels and the EM signals. Since in real-world communication scenarios the EM channel responses vary randomly as a function of spacetime, it is reasonable to model such spatio-temporal variations by a channel GRF, thus allowing Bayesian inference of the channel entries that are not directly measured. 
-Similarly, in order to capture the randomness of the transmitted and received signals, the current distributions $\bm J$ at the transmitter and the electric fields $\bm E$ at the receiver can also be modeled by GRFs \cite{wan2022mutual}, from which information-theoretic quantities $I({\bm J}, {\bm E})$ can be defined to characterize the information transmission capability of such EM channel. 
+Similarly, in order to capture the randomness of the transmitted and received signals, the current distributions $\bm J$ at the transmitter and the electric fields $\bm E$ at the receiver can also be modeled by GRFs \cite{wan2022mutual}, from which information-theoretic quantities $I({\bm J};{\bm E})$ can be defined to characterize the information transmission capability of such EM channel. 
 \begin{figure}
 	\centering 
 	\includegraphics[%height=4cm,
@@ -256,29 +256,34 @@ The mutual information and capacity analysis based on random field can be viewed
 Utilizing the KL expansion scheme, the random field can be decomposed to uncorrelated random variables on orthogonal basis. Then the continuous channel can be viewed as the superposition of all the sub-channels. The information that can be obtained from the received random field is then derived by summing the information of all the sub-channels. Utilizing Fredholm determinant which defines the determinant of operator rather than matrix and is widely used in physics, the mutual information between the transmitted field and the received field can be represented by a closed-form formula. Maximizing the mutual information by optimizing the distribution of the random field, the channel capacity of the continuous wireless system can be obtained. 
 
 \section{Applications of the Electromagnetic Information Theory}
-In this section, we will introduce several applications of the EIT, which utilize the tools and results of EIT to achieve better performance compared to the state-of-art schemes.
+In this section, we will introduce several applications of the EIT, which utilize the tools and results of EIT to achieve better performance compared with the state-of-art technologies.
 \subsection{Location Division Multiple Access}
 \begin{figure*}
 	\centering 
-	\includegraphics[height=5cm, width=15cm]{figures/LDMA.pdf} 
-	\caption{Comparison between the SDMA scheme which can not utilize the radial DoF and the LDMA scheme which exploits the radial DoF. \cite{zhangzijian} }
+	\includegraphics[width=\textwidth]{figures/LDMA.pdf} 
+	\caption{Comparison between the SDMA scheme which can not utilize the radial DoF and the LDMA scheme which exploits the radial DoF. \cite{wu2022multiple} }
 	\label{fig:LDMA}
 \end{figure*}
-For multiple access schemes, the beams emitted from the base station form a functional space. The DoF of the functional space represents the resolution of the base station to users at different locations, which corresponds to the analysis of functional DoF in EIT. Traditional spatial division multiple access based on the far-field model can only distinguish the users by the angles and does not utilize the functional DoF in the radial dimension. For the massive MIMO system which adopts a large-scale antenna array, spherical wave model is used instead of the plane wave assumption. Under the spherical wave model, the users can be distinguished along the radial dimension besides the angular dimension. Therefore, a new division scheme called the location division multiple access (LDMA) can be proposed to fully exploit the functional DoF of the beams and serve users at different angles and distances. In the LDMA scheme, near-field codebook, beam training and channel estimation are designed correspondingly, aiming at fully utilizing the spatial resources. 
+For multiple access schemes, the beams emitted from the base station form a functional space. The DoF of the functional space represents the resolution of the base station to users at different locations, which corresponds to the analysis of functional DoF in EIT. 
+Traditional space-division multiple access based on the far-field model can only distinguish the users by the angles and does not utilize the functional DoF in the radial dimension. 
+For the massive MIMO system which adopts a large-scale antenna array, spherical wave model is used instead of the plane wave assumption. 
+With the spherical wave model, in addition to the angular dimension, the users can also be distinguished along the radial dimension. 
+Therefore, a new division scheme called the location division multiple access (LDMA) is proposed to fully exploit the functional DoF of the beams and serve users at different angles and distances. 
+In the LDMA scheme, near-field codebook, beam training and channel estimation are designed correspondingly, aiming at fully utilizing the spatial resources. 
 
 \subsection{Near Field DoF}
-As discussed in Subsection~\ref{Sec_3_Subsec_2}, the channel DoF of a LoS channel model in EIT is approximately linear to the length of the transceivers and inversely linear to the distance between the transceivers. Therefore, unlike the traditional far-field scenario which can only support one data stream in the LoS channel model, in the near-field region, the wireless communication system has high channel DoF and can support more than one data streams. To fully utilize the near-field channel DoF, a distance-aware precoding scheme is proposed, which adaptively adjusts the number of radio frequency chains to match the channel DoF with different distances.   
+As discussed in Subsection~\ref{Sec_3_Subsec_2}, the channel DoF of a LoS channel model in EIT is approximately proportional to the length of the transceivers and inversely proportional to the distance between the transceivers. Therefore, unlike the traditional far-field scenario which can only support one data stream in the LoS channel model, in the near-field region, the wireless communication system has high channel DoF and can support more than one data streams. To fully utilize the near-field channel DoF, a distance-aware precoding scheme is proposed \cite{wu2022multiple}, which adaptively adjusts the number of radio frequency chains to match the channel DoF with different distances.   
 
 % \subsection{Pilot overhead reduction}
 % The pilot overhead without channel state information will increase linearly with the number of the antennas. For massive MIMO systems, the pilot overhead will be intolerable. Therefore, to reduce the pilot overhead, the prior information of the channel need to be obtained, which projects the high-dimensional channel matrix on a low-dimensional subspace. Such schemes are actually the expansion of the well-known compressed sensing method, which utilizes the sparsity of the channel. The prior information of the channel can be obtained by building the channel model as a random field and analyzing its statistical characteristics. According to the random channel model, the sparsity of it can be explored to derive the required number of dimensions for channel estimation. 
 
 \subsection{Continuous Aperture MIMO}
-Traditional wireless communication systems deploy finite antennas in a limited aperture as the transceivers. To break the performance limit in limited aperture, continuous aperture MIMO (CAP-MIMO), which is also called holographic MIMO, is proposed. CAP-MIMO, which is as the ultimate case of MIMO system, uses a structure that contains infinite dense antennas in a limited spatial region. Such structure equals to continuous apertures that can generate arbitrary current on the transmitter side and detect any electric field on the receiver side. The current distributions on the transmitter are called patterns of the CAP-MIMO. Different signals are modulated on the patterns separately and radiated to the space. Designing the patterns are actually designing the channel division scheme, thus is key to the performance of the CAP-MIMO system \cite{9839220}.
+Traditional wireless communication systems deploy finite antennas in a limited aperture as the transceivers. To break the performance limit in limited aperture, continuous aperture MIMO (CAP-MIMO), which is also called holographic MIMO, is proposed. CAP-MIMO, which is as the ultimate case of MIMO system, uses a structure that contains infinite dense antennas in a limited spatial region. Such structure equals to continuous apertures that can generate arbitrary current on the transmitter side and detect any electric field on the receiver side. The current distributions on the transmitter are called patterns of the CAP-MIMO. Different signals are modulated on the patterns separately and radiated to the space. Designing the patterns are actually designing the channel division scheme, thus is key to the performance of the CAP-MIMO system \cite{zhang2022pdma}.
 
 \begin{figure*}
 	\centering 
 	\includegraphics[height=8cm, width=15cm]{figures/CAPMIMO.pdf} 
-	\caption{Illustration of CAP-MIMO transceivers \cite{zhangzijian} }
+	\caption{Illustration of CAP-MIMO transceivers \cite{zhang2022pdma} }
 	\label{fig:CAPMIMO}
 \end{figure*}
 
@@ -311,13 +316,17 @@ However, there are some problems hiding behind the given power constraint for EI
 \subsection{Achievability of the Electromagnetic Capacity}
 In the information theory convention, to establish a ``capacity'' value, one needs to prove an achievability theorem and a converse bound. Only when these two values coincide can one declare that such a value can be called ``capacity''. And usually, the achievability theorem is relatively more difficult, which requires ingenious mathematical constructions \cite{shannon1948mathematical}. 
 
-The electromagnetic capacity, though carefully defined in \cite{wan2022mutual,zhangzijian}, is far from perfection, since they all lack an achievability proof. 
+The electromagnetic capacity, though carefully defined in \cite{wan2022mutual,zhang2022pdma}, is far from perfection, since they all lack an achievability proof. 
 To prove the achievability of such EM capacity, a spatio-temporal waveform-based channel code may be constructed, which deserves further research and mathematical cosntruction.  
 
 \subsection{Physical Limit of the Current Regulation and Electric Field Detection}
 In the current research of EIT, most works assume that the electromagnetic field is arbitrarily adjustable and detectable. In another perspective, this assumption can be viewed as placing infinite number of antennas in the source and destination region that can work without interference. However, the practical communication systems can not fulfill such conditions. In fact, antenna mutual coupling, which means the energy absorbed by one antenna cause by the work of another antenna, always exists because of the antennas can not be entirely isolated. Considering the mutual coupling of the antennas, we cannot obtain an infinitely dense antenna array, which means that the current regulation and electric field detection of the practical system has a limited accuracy. To guide the design of practical systems, the physical limit of the current regulation and electric field detection still remains to be explored. 
 
 \section{Conclusion}
+In this paper, to reveal the fundamental physical limit of wireless information transmission imposed by the underlying electromagnetic mechanisms, we thoroughly investigate the basic concepts, mathematical tools, channel modeling, and information-theoretic performance indicators that constitute the EIT. 
+Furthermore, we briefly review the novel applications of EIT to the design of wireless communication systems for capacity enhancement and accessibility improvement. 
+
+Though recent progress on EIT demonstrates its possibility to become a unified widely-applicable theory, there are still some unresolved issues that may cause confusions, including the compatibility of EIT with existing MIMO theory, the possible existence of hidden physical constraints that influence the sampling density, and the immature proofs of information-theoretic achievability and converse bounds in EIT. 
 
 
 \footnotesize
