@@ -69,7 +69,7 @@ This work was supported in part by the National Key Research and Development Pro
 \maketitle
 
 \begin{abstract}
-    Abstract ...
+   Massive amount of multiplexing techniques have been proposed to realize the ultra-high-speed wireless communication. These techniques are actually the division of the whole physical resources on a specific perspective. To build a unified theory that can explore the fundamental physical limit of system performance, we should restore to the physical nature of the system. Therefore, electromagnetic information theory (EIT) which analyzes the information conveyed by the continuous electromagnetic field becomes essential. In this article, we systematically investigate the basics and results of EIT. Firstly, we summarize the fundamental analyzing tools of EIT from classical information theory and electromagnetic theory. Then we show the main research content and the corresponding results of EIT, including the continuous modeling, DoF, mutual information and capacity analysis. Finally, we point out several open problems in EIT, based on which further works can be done to improve EIT towards a unified theory.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -78,10 +78,10 @@ This work was supported in part by the National Key Research and Development Pro
 
 \section{Introduction}
 %% leading paragraph. 
-Ultra-high-speed wireless communication are expected to play a cornerstone role in future applications, including immersive virtual reality, digital twins, and holographic videos. 
+Ultra-high-speed wireless communication are expected to play a cornerstone role in future applications including immersive virtual reality, digital twins, and holographic videos \cite{saad2019vision}. 
 In order to fulfill these visions, massive amount of multiplexing technologies have been proposed to exploit various communication resources in the space (SDMA), frequency (FDMA), time (TDMA), polarization, code (CDMA), and even power domains (NOMA) for increasing overall transmission rate. 
 Thus, a natural question arises: {\it what is the fundamental physical limit of such multiplexing in a wireless system?}
-To answer this question, an intuitive observation is that most of these communication resources correspond to several physical quantities that can be independently manipulated. To be concrete, these quantities are the space, frequency, time, and polarization of an electromagnetic impulse that can be generated and transmitted. Though some of these multiplexing technologies are based on mathematical divisions of the channel (CDMA and NOMA), all these multiplexing capability is essentially provided by the electromagnetic fields that finally carry the information. Therefore, it is necessary to construct a theory that can model and analyze the wireless information systems built on continuous electromagnetic fields, which leads to the research on electromagnetic information theory (EIT).
+To answer this question, an intuitive observation is that most of these communication resources correspond to some physical quantities that can be independently manipulated. To be concrete, these quantities are the space, frequency, time, and polarization of an electromagnetic impulse that can be generated and transmitted \cite{shah2022survey}. Though some of these multiplexing technologies are based on mathematical divisions of the channel (CDMA and NOMA), all these multiplexing capability is essentially provided by the electromagnetic fields that finally carry the information \cite{gruber2008new}. Therefore, it is necessary to construct a theory that can model and analyze the wireless information systems built on continuous electromagnetic fields, which leads to the research on electromagnetic information theory (EIT).
 
 %% The definition of EIT. 
 EIT is an interdisciplinary subject that combines deterministic physical theory and probabilistic mathematical theory to study the transmission mechanism of information via spatially continuous electromagnetic field. 
@@ -94,7 +94,7 @@ These traditional models are discrete approximations of the real communication s
 Therefore, existing analysis methods and tools in traditional spatially discrete system models need to be transferred to their continuous counterpart in EIT. 
 
 %% Our contributions.
-In this article, we systematically investigate the ideas and analysis techniques of EIT. The key features of this article can be summarized as follows:
+In this article, we systematically investigate the analyzing techniques and the corresponding results of EIT. The key features of this article can be summarized as follows:
 \begin{itemize}
 \item{The fundamental analysis techniques and mathematical tools for EIT, which originate from classical information theory and electromagnetic theory, are introduced sequentially. Specifically, for information theory, the DoF and channel capacity, which are key performance indicators of wireless systems, are analyzed by using prolate spheroidal wave functions (PSWFs) and probability theory. For electromagnetic theory, the mainstream is to employ Maxwell's equations to build the deterministic electromagnetic field model. Considering both the classical information theory and electromagnetic theory, random fields are introduced to analyze the statistical characteristics of continuous electromagnetic fields, which enables the performance analysis of EIT. }
 \item{Based on the fundamental analysis techniques and tools that can be used in EIT, we further investigate the modeling method of EIT. The deterministic modeling approach and the stochastic modeling approach of the continuous channels are discussed separately. Moreover, the noise model is built in EIT by distinguishing different sources of noise and analyzing the spatial correlation of the noise field. After the EIT modeling process, the DoF, mutual information, and capacity are analyzed by the tools including the PSWFs.} 
@@ -119,14 +119,15 @@ Usually in the communication context, the DoF refers to the number of orthogonal
 Thus, we use the term {\textbf{\emph{channel DoF}}} to describe such a number associated with a channel.
 
 % introduce the functional DoF. 
-In contrast, the DoF is defined asymptotically in the information theory context. From a rigorous point of view, the (asymptotic) DoF is defined to be the minimum dimension $n$ of a functional subspace $\mathcal{B}_n$ that can approximate any function in a larger space $\mathcal{B}$ with arbitrarily given small error $\epsilon$ \cite{poon2005degrees}. For example, the asymptotic DoF of all the  $W$-bandlimited signals within observation duration $T$ is proved to be $2WT+o(2WT)$ \cite{slepian1976bandwidth}. 
+In contrast, the DoF is defined asymptotically in the information theory context. From a rigorous point of view, the (asymptotic) DoF is defined to be the minimum dimension $n$ of a functional subspace $\mathcal{B}_n$ that can approximate any function in a larger space $\mathcal{B}$ with arbitrarily small error $\epsilon$ \cite{poon2005degrees}. For example, the DoF of a $W$-bandlimited signal with observation duration $T$ can be derived by finding the subspace $\mathcal{B}_n$ that contains all the $W$-bandlimited functions that are most concentrated in the time domain. The problem of finding these most concentrated functions, which is named as Slepian's concentration problem, has explicit solutions called PSWFs.
+More interestingly, it is proved that in order to approximately represent any function in $\mathcal{B}_W$, it suffices to pick out $2WT+o(2WT)$ PSWFs as basis functions. Thus, the functional DoF of $\mathcal{B}_W$ is $2WT+o(2WT)$ \cite{slepian1976bandwidth}. 
 Since this kind of DoF numerically characterizes the possibility to approximate a generally infinite-dimensional functional space $\mathcal{B}$ by a finite-dimensional subspace, we refer to it as the {\textbf{\emph{functional DoF}}}. 
 It is worth noting that the functional DoF can be alternatively interpreted as the number of minimal required samples to approximately reconstruct an unknown signal. 
 
 % introduce PSWF and its connection to the evaluation of functional DoF. 
-The explicit evaluation of the functional DoF of arbitrary given functional space is hard in general. However, in some special but important cases this task can be fulfilled by leveraging the constraints that define the functional space.
-For example, the functional space $\mathcal{B}_W$ that contains all the $W$-bandlimited functions can be decomposed by finding those particular bandlimited functions that are most concentrated in the time domain. The problem of finding these most concentrated functions, which is named as Slepian's concentration problem \cite{slepian1961prolate}, has explicit solutions called PSWFs.
-More interestingly, it is proved that in order to approximately represent any function in $\mathcal{B}_W$, it suffices to pick out $2WT+o(2WT)$ PSWFs as basis functions. Thus, the functional DoF of $\mathcal{B}_W$ is $2WT+o(2WT)$. 
+% The explicit evaluation of the functional DoF of arbitrary given functional space is hard in general. However, in some special but important cases this task can be fulfilled by leveraging the constraints that define the functional space.
+% For example, the functional space $\mathcal{B}_W$ that contains all the $W$-bandlimited functions can be decomposed by finding those particular bandlimited functions that are most concentrated in the time domain. The problem of finding these most concentrated functions, which is named as Slepian's concentration problem, has explicit solutions called PSWFs.
+% More interestingly, it is proved that in order to approximately represent any function in $\mathcal{B}_W$, it suffices to pick out $2WT+o(2WT)$ PSWFs as basis functions. Thus, the functional DoF of $\mathcal{B}_W$ is $2WT+o(2WT)$. 
 
 % Similar to the singular decomposition method for evaluating the channel DoF, the functional DoF of a given signal space is evaluated by approximating the signal space by a finite-dimensional subspace. In the case of band-limited functional space, this decomposition where the basis functions of the subspace are obtained by solving a the Slepian's concentration problem, and the solutions are proved to be the prolate spheroidal wave functions (PSWFs). 
 
@@ -154,7 +155,7 @@ As a result, pure EM theory cannot capture the random nature that arises in comm
 \subsection{Random Fields}
 \label{Sec_2_Subsec_4}
 In order to apply information-theoretic analysis to EM fields, probabilistic measures should be assigned to the functional space containing all the possible EM fields that satisfy Maxwell's equations, which leads to the random field modeling for EIT. 
-Random fields are well-studied mathematical objects, among which the Gaussian random fields (GRFs) are the most widely applied instance. 
+Random fields are well-studied mathematical objects, among which the Gaussian random fields (GRFs) are the most widely applied instances. 
 
 GRFs are random multivariate functions whose finite-dimensional marginal distributions are Gaussian. Justified by the central limit theorem, many complicated spatially dependent random values that arise in communications can be modeled by GRFs.  
 Inheriting favorable mathematical properties from Gaussian distributions, such GRF modeling exhibits good analytical properties that can facilitate both theoretical deduction and numerical inference. 
@@ -232,7 +233,7 @@ As we have clarified in Section~\ref{Sec_2_Subsec_2}, the functional DoF in clas
 	\centering 
 	\includegraphics[width=\linewidth]{figures/PSWF.pdf} 
 	\caption{Illustration of functional spaces and their analogy with finite-dimensional vector spaces }
-	\label{fig:CAPMIMO}
+	\label{fig:PSWF}
 \end{figure}
 
 In the analysis approach of spatial functional DoF, a notion named spatial bandwidth is introduced, which extends the bandwidth in classic information theory to spatial domain \cite{bucci1987spatial}. The bandwidth in classic information theory depicts the band-limited characteristics of the signal in the frequency domain, and can be used to derive the DoF of the signal according to Nyquist sampling theorem. Similarly, the spatial bandwidth depicts the band-limited characteristics of the electromagnetic field in the wavenumber domain, and can be used to derive the DoF of the electromagnetic field in the space-wavenumber domain. For a given channel model, the spatial bandwidth can be approximated using the method of steepest descent. More general results considering the four-dimensional spacetime are based on Landau's eigenvalue problem.
@@ -288,7 +289,7 @@ Traditional wireless communication systems deploy finite antennas in a limited a
 	\label{fig:CAPMIMO}
 \end{figure*}
 
-Several works have already explored the pattern design scheme for CAP-MIMO system. The simplest and the easiest way to implement is utilizing the Fourier basis as the patterns, which transfer the approach of OFDM scheme in the time-frequency domain to spatial-wavenumber domain. Other special functions are also utilized to design the patterns in the corresponding assumptions like line-of sight communication or single receiver. For general scenarios, the continuous current patterns can be projected to orthogonal basis and optimization schemes can be utilized to obtain the near-optimal solution of the pattern design scheme.
+% Several works have already explored the pattern design scheme for CAP-MIMO system. The simplest and the easiest way to implement is utilizing the Fourier basis as the patterns, which transfer the approach of OFDM scheme in the time-frequency domain to spatial-wavenumber domain. Other special functions are also utilized to design the patterns in the corresponding assumptions like line-of sight communication or single receiver. For general scenarios, the continuous current patterns can be projected to orthogonal basis and optimization schemes can be utilized to obtain the near-optimal solution of the pattern design scheme.
 
 \subsection{Field Reconstruction}
 In engineering practice, it is often required to reconstruct the values of an electromagnetic field from a finite number of available observations, which is called the field reconstruction problem. 
