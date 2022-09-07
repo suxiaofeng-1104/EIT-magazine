@@ -117,10 +117,10 @@ The number of degrees of freedom (DoF) is a mathematical quantity that describes
 Usually in the communication context, the DoF refers to the number of orthogonal subchannels that can carry information independently, which is uniquely determined by the channel characteristics and is often calculated by counting the significant singular values of a given channel matrix \cite{goldsmith2003capacity}. 
 Thus, we use the term {\textbf{\emph{channel DoF}}} to describe such a number associated with a channel.
 
-% introduce the functional DoF. 
-In contrast, the DoF is defined asymptotically in the information theory context. From a rigorous point of view, the (asymptotic) DoF is defined to be the minimum dimension $n$ of a functional subspace $\mathcal{B}_n$ that can approximate any function in a larger space $\mathcal{B}$ with arbitrarily small error $\epsilon$ \cite{poon2005degrees}. For example, the DoF of a $W$-bandlimited signal with observation duration $T$ can be derived by finding the subspace $\mathcal{B}_n$ that contains all the $W$-bandlimited functions that are most concentrated in the time domain. The problem of finding these most concentrated functions, which is named as Slepian's concentration problem, has explicit solutions called PSWFs.
-More interestingly, it is proved that in order to approximately represent any function in $\mathcal{B}_W$, it suffices to pick out $2WT+o(2WT)$ PSWFs as basis functions. Thus, the functional DoF of $\mathcal{B}_W$ is $2WT+o(2WT)$ \cite{slepian1976bandwidth}. 
-Since this kind of DoF numerically characterizes the possibility to approximate a generally infinite-dimensional functional space $\mathcal{B}$ by a finite-dimensional subspace, we refer to it as the {\textbf{\emph{functional DoF}}}. 
+% introduce the functional DoF. The formulas 2WT+o(2WT) is indispensable here. 
+In contrast, the DoF is defined asymptotically in the information theory context. From a rigorous point of view, the (asymptotic) DoF is defined to be the minimum dimension of a finite-dimensional functional subspace that can approximate any function in a larger space with arbitrarily small error~\cite{poon2005degrees}. For example, the DoF of $W$-bandlimited signals with observation duration $T$ can be derived by finding the finite-dimensional subspace which contains all the $W$-bandlimited functions that are most concentrated in the time domain. The problem of finding these most concentrated functions is named as Slepian's concentration problem, and it has explicit solutions called PSWFs.
+More interestingly, it is proved that in order to approximately represent any $W$-bandlimited function, it suffices to pick out $2WT+o(2WT)$ PSWFs as basis functions. Thus, the functional DoF of the $W$-bandlimited signals is $2WT+o(2WT)$ \cite{slepian1976bandwidth}. 
+Since this kind of DoF numerically characterizes the possibility to approximate a generally infinite-dimensional functional space by a finite-dimensional subspace, we refer to it as the {\textbf{\emph{functional DoF}}}. 
 It is worth noting that the functional DoF can be alternatively interpreted as the number of minimal required samples to approximately reconstruct an unknown signal. 
 
 % introduce PSWF and its connection to the evaluation of functional DoF. 
@@ -133,9 +133,9 @@ It is worth noting that the functional DoF can be alternatively interpreted as t
 \subsection{Channel Capacity}
 \label{Sec_2_Subsec_2}
 Different from the notion of channel DoF which characterizes the number of orthogonal subchannels available, the channel capacity measures the error-free information transmission capability of the channel. 
-Since the transmission errors are caused by random channel noise, the channel is information-theoretically defined to be a conditional transition probability $p_{Y|X}(y|x)$ with $x$ being the channel input and $y$ being the channel output. 
-Then, the mutual information $I(X; Y)$ between a pair of random variables $(X, Y)$ can be defined, and the channel capacity $C$ is derived by taking the supremum of the mutual information over all the input distributions $p_X(\cdot)$ of the channel. Shannon proved in his seminal paper \cite{shannon1948mathematical} that this channel capacity $C$ is ``achievable'' in the sense that for any given error probability $\epsilon$ and code rate $R<C$, there exists a pair of encoder-decoder of sufficient code length that operates below such error probability $\epsilon$. 
-Interestingly, he also proved the ``converse'' theorem that for arbitrary code rate $R>C$, no matter what code is employed, the error probability is bounded away from zero, indicating that it is impossible to realize error-free transmission when $R>C$. Thus, the quantity $C$ is established to be the fundamental transmission limit of such a channel $p_{Y|X}$. 
+Since the transmission errors are caused by random channel noise, the channel is information-theoretically defined to be a conditional transition probability that maps the channel input randomly to the output. 
+Then, the mutual information between the input and output can be defined, and the channel capacity is derived by taking the supremum of the mutual information over all the input distributions of the channel. Shannon proved in his seminal paper \cite{shannon1948mathematical} that this channel capacity is ``achievable'' in the sense that for any given error probability and code rate lower than the capacity, there exists a pair of encoder-decoder of sufficient code length that operates below such error probability. 
+Interestingly, he also proved the ``converse'' theorem that for arbitrary code rate higher than capacity, no matter what code is employed, the error probability is bounded away from zero, indicating that it is impossible to realize error-free transmission if transmitting at a higher-than-capacity rate. Thus, the value of channel capacity is established to be the fundamental transmission limit of such a given channel. 
 
 
 % The second step is to discretize the continuous time-domain waveform channel into a series of independent symbol channels, and sum over the capacities of each symbol channel to obtain the overall waveform channel capacity. Without loss of generality, a $W$-bandlimited waveform channel is first considered, which is equivalent to setting $h(t)=W{\rm sinc}(Wt)$. Not rigorously, this discretization step is done by the Shannon-Nyquist sampling theorem, stating that a number of $2WT$ independent samples can be obtained from a waveform channel bandlimited to $W$ and time-limited to $T$. From a more rigorous functional point of view, the $W$-bandlimited waveform channel is viewed as a projection operator $\mathcal{B}$ that maps a signal $x\in{\mathcal{L}^2(\mathbb{R})}$ into the bandlimited received signal $y={\mathcal{B}x}$, and the information-transmission capability of such operator $\mathcal{B}$ is characterized by its eigenvalues over a finite time interval $[-T/2, T/2]$. This eigenproblem is referred as the Slepian's concentration problem. Solving this eigenproblem directly leads to the eigenfunctions called prolate spheroidal wave functions (PSWF), and the number of significant eigenvalues above a certain threshold is exactly $2WT+\mathcal{O}(\log(WT))$. The number of these dominating eigenvalues are often referred to as the degrees of freedom (DoF) of this channel, which means that this $W$-bandlimited $T$-timelimited waveform channel can be asymptotically viewed as $2WT$ parallel Gaussian symbol channels, as $T\to\infty$. The capacity of a $W$-bandlimited channel, in bits per second, can then be derived accordingly. 
@@ -147,7 +147,7 @@ Interestingly, he also proved the ``converse'' theorem that for arbitrary code r
 % Basics about electromagnetics.
 Electromagnetic theory is a branch of physics that studies the electromagnetic (EM) interaction in four-dimensional spacetime from a field-theoretic point of view. The EM forces are carried by EM vector fields, which are usually described by Maxwell's equations. Maxwell's equations are four linear partial differential equations that characterize how the electric fields and magnetic fields are altered by each other and by charges and currents. Combining these four equations, a vector wave equation can be obtained that manifests the existence of EM waves. 
 
-In wireless communications, in order to describe the EM response at the receiver induced by the transmitted wave at the transmitter, Green's function $\bm G$ is often introduced as the spatial impulse response of the EM system \cite{stratton2007electromagnetic}. Since the electric and magnetic field vectors are all three-dimensional time-varying vectors, Green's function is a dyad-valued function of spacetime. 
+In wireless communications, in order to describe the EM response at the receiver induced by the transmitted wave at the transmitter, Green's function is often introduced as the spatial impulse response of the EM system \cite{stratton2007electromagnetic}. Since the electric and magnetic field vectors are all three-dimensional time-varying vectors, Green's function is a dyad-valued function of spacetime. 
 Note that EM theory is a deterministic theory built on partial differential equations and the knowledge of all the surroundings, and thus Green's function is uniquely determined by the boundary conditions of the EM problem.
 As a result, pure EM theory cannot capture the random nature that arises in communications. 
 
@@ -160,7 +160,7 @@ GRFs are random multivariate functions whose finite-dimensional marginal distrib
 Inheriting favorable mathematical properties from Gaussian distributions, such GRF modeling exhibits good analytical properties that can facilitate both theoretical deduction and numerical inference. 
 
 In EIT, the GRFs can be utilized to model both the EM channels and the EM signals. Since in real-world communication scenarios the EM channel responses vary randomly as a function of spacetime, it is reasonable to model such spatio-temporal variations by a channel GRF, thus allowing Bayesian inference of the channel entries that are not directly measured. 
-Similarly, in order to capture the randomness of the transmitted and received signals, the current distributions $\bm J$ at the transmitter and the electric fields $\bm E$ at the receiver can also be modeled by GRFs \cite{wan2022mutual}, from which information-theoretic quantities $I({\bm J};{\bm E})$ can be defined to characterize the information transmission capability of such EM channel. 
+Similarly, in order to capture the randomness of the transmitted and received signals, the current distributions at the transmitter and the electric fields at the receiver can also be modeled by GRFs \cite{wan2022mutual}, from which information-theoretic mutual information can be defined to characterize the information transmission capability of such EM channel. 
 \begin{figure}
 	\centering 
 	\includegraphics[%height=4cm,
@@ -217,7 +217,7 @@ Similarly, in EIT, the noise is usually modeled by a spatial AWGN with flat wave
 In general, the noise values that emerge on different points of space cannot be assumed independent, i.e., they do exhibit some spatial correlation. 
 This is because the noise is not completely composed of spatially uncorrelated thermal noise. 
 The unwanted interference waves wandering in the space also enter the receiver, leading to an equivalent noise signal which are spatially correlated in general. 
-To characterize this electromagnetic interference, the one-ring model is borrowed from prior works on channel modeling~\cite{patzold2004space}, and is extend to a more general one-sphere scenario with polarized electromagnetic waves~\cite{wan2022mutual}, while the exact expressions of the spatial correlation function can still be obtained. 
+To characterize this electromagnetic interference, the one-ring model is borrowed from prior works on channel modeling, and is extend to a more general one-sphere scenario with polarized electromagnetic waves~\cite{wan2022mutual}, while the exact expressions of the spatial correlation function can still be obtained. 
 This non-white spatially correlated noise model is of theoretical importance, since it is provably compatible with the Maxwell's equations, while other noise models including the sinc-shaped or jinc-shaped correlation functions fail to satisfy the Maxwell's constraints because they ignore the polarization of the electromagnetic waves. 
 
 
@@ -251,18 +251,18 @@ The DoF of the channel in this model should be the expected value averaged by pr
 
 
 \subsection{Mutual Information and Capacity Analysis}
-Besides the DoF which reveals the number of sub-channels available, the channel capacity is another important performance indicator, which shows the limit of the information transmission rate of the wireless system. Compared to traditional MIMO information theory which uses random vectors as transmitted and received signals, electromagnetic information theory models the electromagnetic field as random fields. The random field modeling follows the statistical approach of mutual information and capacity analysis by Shannon. Each realization of the random field represents a pattern of the radiating field. The ensemble of the realizations, to which a probability measure is assigned, depicts the statistical characteristics of the system. 
+Besides the DoF which reveals the number of sub-channels available, the channel capacity is another important performance indicator, which shows the limit of the information transmission rate of the wireless system. Compared to traditional MIMO information theory which uses random vectors as transmitted and received signals, EIT models the electromagnetic field as random fields. The random field modeling follows the statistical approach of mutual information and capacity analysis by Shannon. Each realization of the random field represents a pattern of the radiating field. The ensemble of the realizations, to which a probability measure is assigned, depicts the statistical characteristics of the system. 
 
-The mutual information and capacity analysis based on random fields extends the  analysis based random vectors. The main difference between them is that the former approach is in the continuous domain and the latter approach is in the discrete domain. For electromagnetic information theory, operator theory can be used to represent the characteristics of the random field. 
-Utilizing the KL expansion scheme, the random field can be decomposed to uncorrelated random variables on orthogonal basis. Then the continuous channel can be viewed as the superposition of all the sub-channels. The information that can be obtained from the received random field is then derived by summing the information of all the sub-channels. Utilizing Fredholm determinant which defines the determinant of operator rather than matrix and is widely used in physics, the mutual information between the transmitted field and the received field can be represented by a closed-form formula. Maximizing the mutual information by optimizing the distribution of the random field, the channel capacity of the continuous wireless system can be obtained. 
+The mutual information and capacity analysis based on random fields extends the  analysis based random vectors. The main difference between them is that the former approach is in the continuous domain and the latter approach is in the discrete domain. For EIT, operator theory can be used to represent the characteristics of the random field. 
+Utilizing the KL expansion theorem, the random field can be decomposed to uncorrelated random variables on orthogonal basis. Then the continuous channel can be viewed as the superposition of all the sub-channels. The information that can be obtained from the received random field is then derived by summing the information of all the sub-channels. Utilizing Fredholm determinant which defines the determinant of operator rather than matrix and is widely used in physics, the mutual information between the transmitted field and the received field can be represented by a closed-form formula. Maximizing the mutual information by optimizing the distribution of the random field, the channel capacity of the continuous wireless system can be obtained. 
 
-\section{Applications of the Electromagnetic Information Theory}
+\section{Applications of EIT}
 In this section, we will introduce several applications of the EIT, which utilize the tools and results of EIT to achieve better performance compared with the state-of-art technologies.
 \subsection{Location Division Multiple Access}
 \begin{figure*}
 	\centering 
 	\includegraphics[width=0.9\textwidth]{figures/LDMA.pdf} 
-	\caption{Comparison between the SDMA scheme which can not utilize the radial DoF and the LDMA scheme which exploits the radial DoF. \cite{wu2022multiple} }
+	\caption{Comparison between the SDMA scheme which can not utilize the radial DoF and the LDMA scheme which exploits the radial DoF~\cite{wu2022multiple} }. 
 	\label{fig:LDMA}
 \end{figure*}
 For multiple access schemes, the beams emitted from the base station form a functional space. The DoF of the functional space represents the resolution of the base station to users at different locations, which corresponds to the analysis of functional DoF in EIT. 
@@ -336,6 +336,24 @@ Though recent progress on EIT demonstrates its possibility to become a unified w
 
 \bibliographystyle{IEEEtran}
 \bibliography{EIT, IEEEabrv}
+
+\normalsize
+\section*{Biographies}
+
+{\bf Jieao Zhu} is a Ph.D. researcher in BNRist from Tsinghua University, Beijing, China.
+\\
+
+{\bf Zhongzhichao Wan} is a Ph.D. researcher in BNRist from Tsinghua University, Beijing, China.
+\\
+
+{\bf Xiaofeng Su} is 
+\\
+
+{\bf Kunzan Liu} is 
+\\
+
+{\bf Linglong Dai} is an associate professor at Tsinghua University. He has received six conference best paper awards and four journal best paper awards. 
+
 
 \end{document}
 
